@@ -4,6 +4,7 @@ export interface Props {
 }
 
 const { title } = Astro.props;
+import HuvudBild from '../components/Bild.astro';
 ---
 
 <!DOCTYPE html>
@@ -16,20 +17,77 @@ const { title } = Astro.props;
 		<title>{title}</title>
 	</head>
 	<body>
-		<slot />
+		<div class="container">
+			<HuvudBild />
+			<slot />
+		</div>
 	</body>
 </html>
+
 <style is:global>
-	:root {
-		--accent: 124, 58, 237;
-		--accent-gradient: linear-gradient(45deg, rgb(var(--accent)), #da62c4 30%, white 60%);
-	}
 	html {
 		font-family: system-ui, sans-serif;
-		background-color: #F6F6F6;
+		background-color: rgb(123, 85, 220);
+		margin: auto;
+		padding: 1.5rem;
+		max-width: 60ch;
 	}
 	code {
 		font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
 			Bitstream Vera Sans Mono, Courier New, monospace;
 	}
+	h1{
+    font-family: ParchmentEGEN, serif;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+h2,h3,h4{
+    font-family: Courier NewEGEN, serif;
+    font-weight: bold;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+label, button, input, p{
+    font-family: Courier NewEGEN, serif;
+}
+
+@font-face {
+    font-family: 'ParchmentEGEN';
+    src: url('fonts/Parchment-Regular.eot');
+    src: url('fonts/Parchment-Regular.eot?#iefix') format('embedded-opentype'),
+    url('fonts/Parchment-Regular.woff2') format('woff2'),
+    url('fonts/Parchment-Regular.woff') format('woff'),
+    url('fonts/Parchment-Regular.ttf') format('truetype'),
+    url('fonts/Parchment-Regular.svg#Parchment-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Courier NewEGEN';
+    src: url('fonts/CourierNewPSMT.eot');
+    src: url('fonts/CourierNewPSMT.eot?#iefix') format('embedded-opentype'),
+    url('fonts/CourierNewPSMT.woff2') format('woff2'),
+    url('fonts/CourierNewPSMT.woff') format('woff'),
+    url('fonts/CourierNewPSMT.ttf') format('truetype'),
+    url('fonts/CourierNewPSMT.svg#CourierNewPSMT') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+</style>
+
+<style>
+	.container {
+        flex-direction: column;
+		display: flex;
+  		justify-content: center;
+    }
 </style>
