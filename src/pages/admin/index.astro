@@ -1,0 +1,16 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import VisaKvitto from '../../components/VisaKvitton.svelte';
+---
+
+<Layout title="lukas kingen">
+	<main class="test">
+		<VisaKvitto client:load />
+	</main>
+</Layout>
+
+<style>
+	.test {
+		align-self: center;
+	}
+</style>
