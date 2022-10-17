@@ -10,6 +10,11 @@ import image from "@astrojs/image";
 import svelte from "@astrojs/svelte";
 
 // https://astro.build/config
+import deno from "@astrojs/deno";
+
+// https://astro.build/config
 export default defineConfig({
-  integrations: [react(), image(), svelte()]
+  integrations: [react(), image(), svelte()],
+  output: "server",
+  adapter: deno()
 });

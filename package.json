@@ -11,6 +11,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/deno": "^1.2.0",
     "@astrojs/image": "^0.10.0",
     "@astrojs/react": "^1.2.0",
     "@astrojs/svelte": "^1.0.2",
