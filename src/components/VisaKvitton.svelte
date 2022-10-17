@@ -1,6 +1,5 @@
 <script>
     import EttKvitto from "./EttKvitto.svelte";
-    import {skapaExcelArk} from './ExcelFunktion.svelte';
 
     let VilkaKvittonAttVisa = "alla"
     let data = [{"Vara":"test",
@@ -24,7 +23,7 @@
 
 <div>
     <span class="FlexAndCenter">
-        <button class="FlexAndCenter" on:click={()=> skapaExcelArk(data)}>
+        <button class="FlexAndCenter">
             exportera till excel
         </button>
     </span>
