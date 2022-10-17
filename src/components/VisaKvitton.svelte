@@ -2,100 +2,96 @@
     import EttKvitto from "./EttKvitto.svelte";
 
     let VilkaKvittonAttVisa = "alla"
-    let data = [{"Vara":"test",
-        "Pris":113,
-        "ValdKategori":"Övrigt",
-        "Swish":"0727043013",
-        "Bild":"https://post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/02/322868_1100-800x825.jpg",
-        "Datum":"2022-10-17",
-        "Typavköp":"Intäkt",
-        "Fixad": true},
-        {"Vara":"nice",
-        "Pris":432,
-        "ValdKategori":"Kök&fester",
-        "Swish":"0727043013",
-        "Bild":"https://cdn.britannica.com/20/194520-050-DCAE62F1/New-World-Sylvilagus-cottontail-rabbits.jpg",
-        "Datum":"2022-10-17",
-        "Typavköp":"Avgift",
-        "Fixad": false}
-        ]
+    export let data;;
 </script>
 
 <div>
     <span class="FlexAndCenter">
-        <button class="FlexAndCenter">
-            exportera till excel
-        </button>
+        <button class="FlexAndCenter"> exportera till excel </button>
     </span>
     <div class="centerKnappar">
-        <button name="visaalla" value="alla" on:click={()=> VilkaKvittonAttVisa = "alla"}>visa alla
+        <button
+            name="visaalla"
+            value="alla"
+            on:click={() => (VilkaKvittonAttVisa = "alla")}
+            >visa alla
         </button>
-        <button name="visaintefixade" value="intefixade" on:click={()=> VilkaKvittonAttVisa = "intefixade"}>visa inte
-            fixade
+        <button
+            name="visaintefixade"
+            value="intefixade"
+            on:click={() => (VilkaKvittonAttVisa = "intefixade")}
+            >visa inte fixade
         </button>
-        <button name="visaintäkter" value="visaintäkter" on:click={()=> VilkaKvittonAttVisa = "Intäkt"}>visa intäkter
+        <button
+            name="visaintäkter"
+            value="visaintäkter"
+            on:click={() => (VilkaKvittonAttVisa = "Intäkt")}
+            >visa intäkter
         </button>
-        <button name="visautgifter" value="visautgifter" on:click={()=> VilkaKvittonAttVisa = "Avgift"}>visa avgifter
+        <button
+            name="visautgifter"
+            value="visautgifter"
+            on:click={() => (VilkaKvittonAttVisa = "Avgift")}
+            >visa avgifter
         </button>
     </div>
 
     {#if VilkaKvittonAttVisa == "alla"}
-        {#each data as  {Vara, Pris, ValdKategori, Swish, Bild, Datum, Typavköp} }
-            <EttKvitto 
-            Vara={Vara}
-            Pris={Pris}
-            ValdKategori={ValdKategori}
-            Swish={Swish}
-            Bild={Bild}
-            Datum={Datum}
-            Typavköp={Typavköp}
+        {#each data as { Vara, Pris, Kategori, Swish, Bild, Datum, Typavköp }}
+            <EttKvitto
+                {Vara}
+                {Pris}
+                {Kategori}
+                {Swish}
+                {Bild}
+                {Datum}
+                {Typavköp}
             />
         {/each}
     {:else if VilkaKvittonAttVisa == "Intäkt"}
-        {#each data as  {Vara, Pris, ValdKategori, Swish, Bild, Datum, Typavköp} }
-            {#if Typavköp == "Intäkt"}
-                <EttKvitto 
-                Vara={Vara}
-                Pris={Pris}
-                ValdKategori={ValdKategori}
-                Swish={Swish}
-                Bild={Bild}
-                Datum={Datum}
-                Typavköp={Typavköp}
+        {#each data as { Vara, Pris, Kategori, Swish, Bild, Datum, Typavköp }}
+            {#if Typavköp == "intäkt"}
+                <EttKvitto
+                    {Vara}
+                    {Pris}
+                    {Kategori}
+                    {Swish}
+                    {Bild}
+                    {Datum}
+                    {Typavköp}
                 />
             {/if}
         {/each}
     {:else if VilkaKvittonAttVisa == "intefixade"}
-        {#each data as  {Vara, Pris, ValdKategori, Swish, Bild, Datum, Typavköp, Fixad} }
+        {#each data as { Vara, Pris, Kategori, Swish, Bild, Datum, Typavköp, Fixad }}
             {#if Fixad == false}
-                <EttKvitto 
-                Vara={Vara}
-                Pris={Pris}
-                ValdKategori={ValdKategori}
-                Swish={Swish}
-                Bild={Bild}
-                Datum={Datum}
-                Typavköp={Typavköp}
+                <EttKvitto
+                    {Vara}
+                    {Pris}
+                    {Kategori}
+                    {Swish}
+                    {Bild}
+                    {Datum}
+                    {Typavköp}
                 />
             {/if}
         {/each}
     {:else if VilkaKvittonAttVisa == "Avgift"}
-        {#each data as  {Vara, Pris, ValdKategori, Swish, Bild, Datum, Typavköp} }
-            {#if Typavköp == "Avgift"}
-                <EttKvitto 
-                Vara={Vara}
-                Pris={Pris}
-                ValdKategori={ValdKategori}
-                Swish={Swish}
-                Bild={Bild}
-                Datum={Datum}
-                Typavköp={Typavköp}
+        {#each data as { Vara, Pris, Kategori, Swish, Bild, Datum, Typavköp }}
+            {#if Typavköp == "avgift"}
+                <EttKvitto
+                    {Vara}
+                    {Pris}
+                    {Kategori}
+                    {Swish}
+                    {Bild}
+                    {Datum}
+                    {Typavköp}
                 />
             {/if}
         {/each}
     {/if}
 </div>
-
 
 <style>
     .container {
