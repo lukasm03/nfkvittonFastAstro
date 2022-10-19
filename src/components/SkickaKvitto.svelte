@@ -1,5 +1,6 @@
 <script>
     let ValdKategori, Vara, Pris, Datum, Swish, Bild;
+    let Skickat = "";
     let Typavköp = "Avgift";
     const typer = ["Avgift", "Intäkt"];
     const OlikaKategorier = [
@@ -12,13 +13,39 @@
     ];
 
     const onFileSelected = (e) => {
-        let image = e.target.files[0];
-        let reader = new FileReader();
-        reader.readAsDataURL(image);
-        reader.onload = (e) => {
-            Bild = e.target.result;
-        };
+        Bild = e.target.files[0];
     };
+
+    import { createClient } from "@supabase/supabase-js";
+    const urls = "https://fwikjqgmaisqizeqbaji.supabase.co";
+    const keys =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ3aWtqcWdtYWlzcWl6ZXFiYWppIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjYwMjkxMjIsImV4cCI6MTk4MTYwNTEyMn0.v0LCLpTObviIdT8vEMfxfTOjQeZOaaaC7MMXdR7ib_o";
+    const imageURL =
+        "https://fwikjqgmaisqizeqbaji.supabase.co/storage/v1/object/public/";
+
+    async function onSubmittion(e) {
+        e.preventDefault();
+        const supabase = createClient(urls, keys);
+        const { data } = await supabase.storage
+            .from("bildavkvitton")
+            .upload(`public/${Bild.name}`, Bild, {
+                upsert: true,
+            });
+        const { error } = await supabase.from("kvitton").insert({
+            Vara: Vara,
+            Pris: Pris,
+            Kategori: ValdKategori,
+            Datum: Datum,
+            Bild: `${imageURL}${data.Key}`,
+            Swish: Swish,
+            Typavköp: Typavköp,
+            Fixad: false,
+        });
+        Skickat = "Kvitto inskickat!";
+        Bild = Datum = Pris = Swish = Typavköp = ValdKategori = Vara = "";
+        await new Promise((r) => setTimeout(r, 5000));
+        Skickat = "";
+    }
 </script>
 
 <div class="Form">
@@ -27,9 +54,14 @@
             <button on:click={() => (Typavköp = typ)}>{typ}</button>
         {/each}
     </div>
-    <form class="formStyle">
+    <form class="formStyle" on:submit={(e) => onSubmittion(e)}>
         <label class="labelStyle" for="kategori">Kategori på {Typavköp}:</label>
-        <select name="kategori"class="kategori" bind:value={ValdKategori} required>
+        <select
+            name="kategori"
+            class="kategori"
+            bind:value={ValdKategori}
+            required
+        >
             {#each OlikaKategorier as kategori}
                 <option value={kategori}>{kategori}</option>
             {/each}
@@ -57,20 +89,14 @@
             name="Bild"
             style={{ alignSelf: "center" }}
             placeholder="bild på kvitto"
-            on:change={(e)=>onFileSelected(e)}
+            on:change={(e) => onFileSelected(e)}
             required
         />
 
         <label class="labelStyle" for="Swish">Swish-nummer:</label>
-        <input
-            type="tel"
-            name="Swish"
-            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-            bind:value={Swish}
-            required
-        />
-
+        <input type="tel" name="Swish" bind:value={Swish} required />
         <button class="buttonStyle" type="submit"> Skicka in kvitto </button>
+        <p>{Skickat}</p>
     </form>
 </div>
 
