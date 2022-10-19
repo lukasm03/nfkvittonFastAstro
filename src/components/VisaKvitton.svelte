@@ -1,13 +1,14 @@
 <script>
     import EttKvitto from "./EttKvitto.svelte";
+    import skapaExcelArk from "../utils/utils"
 
     let VilkaKvittonAttVisa = "alla"
-    export let data;;
+    export let data;
 </script>
 
 <div>
     <span class="FlexAndCenter">
-        <button class="FlexAndCenter"> exportera till excel </button>
+        <button class="FlexAndCenter" on:click={()=> skapaExcelArk(data)}> exportera till excel </button>
     </span>
     <div class="centerKnappar">
         <button
@@ -50,7 +51,7 @@
         {/each}
     {:else if VilkaKvittonAttVisa == "Intäkt"}
         {#each data as { Vara, Pris, Kategori, Swish, Bild, Datum, Typavköp }}
-            {#if Typavköp == "intäkt"}
+            {#if Typavköp == "Intäkt"}
                 <EttKvitto
                     {Vara}
                     {Pris}
@@ -78,7 +79,7 @@
         {/each}
     {:else if VilkaKvittonAttVisa == "Avgift"}
         {#each data as { Vara, Pris, Kategori, Swish, Bild, Datum, Typavköp }}
-            {#if Typavköp == "avgift"}
+            {#if Typavköp == "Avgift"}
                 <EttKvitto
                     {Vara}
                     {Pris}

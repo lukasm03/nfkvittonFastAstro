@@ -1,6 +1,6 @@
 <script>
 
-export let ValdKategori, Vara, Pris, Datum, Swish, Bild, Typavköp;
+export let Kategori, Vara, Pris, Datum, Swish, Bild, Typavköp;
 
 </script>
 
@@ -16,7 +16,7 @@ export let ValdKategori, Vara, Pris, Datum, Swish, Bild, Typavköp;
             på {Typavköp}: {Pris} kr</p>
         </div>
         <div class="div3"><p class="fitText">kategori
-            på {Typavköp}: {ValdKategori}</p>
+            på {Typavköp}: {Kategori}</p>
         </div>
         <div class="div4"><p class="fitText">datum {Typavköp}en
             skedde: {Datum}</p>
